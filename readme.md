@@ -1,4 +1,4 @@
-# [lazyload-image](http://1000ch.github.io/lazyload-image)
+# [`<lazyload-image>`](http://1000ch.github.io/lazyload-image)
 
 ## About
 
