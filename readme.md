@@ -20,7 +20,7 @@ Modify your `<img>` elements such as following.
 
 ### Fallback
 
-If browser does not support `Document#registerElement()`, Images will be loaded as usual.
+If browser does not support `document.registerElement()`, Images will be loaded as usual.
 
 ### Offset option
 
