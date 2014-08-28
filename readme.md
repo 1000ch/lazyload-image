@@ -2,7 +2,7 @@
 
 ## About
 
-Extended HTMLImageElement for lazy image loading as WebComponents. Images will be loaded when they are shown.
+Extended HTMLImageElement for lazy image loading as Web Components. Images will be loaded when they are shown.
 
 ## Usage
 
