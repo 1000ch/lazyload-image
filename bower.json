@@ -1,0 +1,24 @@
+{
+  "name": "lazyload-image",
+  "main": "lazyload-image.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/1000ch/lazyload-image",
+  "authors": [
+    "1000ch <shogo.sensui@gmail.com>"
+  ],
+  "description": "Extended image element for lazy loading as Web Components.",
+  "keywords": [
+    "image",
+    "lazyload",
+    "web-components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "assets",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
