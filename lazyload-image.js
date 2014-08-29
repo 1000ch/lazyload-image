@@ -1,4 +1,5 @@
 (function () {
+  'use strict';
 
   var FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
   var DEFAULT_OFFSET = 300;
