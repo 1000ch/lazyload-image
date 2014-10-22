@@ -47,7 +47,7 @@
     this.original = this.src;
     this.src = FALLBACK_IMAGE;
 
-    // get offset attribute for preloading
+    // get offset attribute for pre-loading
     this.offset = this.getAttribute('offset') - 0 || DEFAULT_OFFSET;
 
     this.onLoad = function (e) {
@@ -61,8 +61,10 @@
 
     this.onScroll = throttle(function (e) {
       var imgRect = that.getBoundingClientRect();
-      if (imgRect.top > document.documentElement.scrollTop - that.offset &&
-          imgRect.bottom < document.documentElement.clientHeight + that.offset) {
+      var displayTop = document.documentElement.scrollTop;
+      var displayBottom = displayTop + document.documentElement.clientHeight;
+      if (imgRect.top > displayTop - that.offset &&
+          imgRect.bottom < displayBottom + that.offset) {
         that.addEventListener('load', that.onLoad);
         that.addEventListener('error', that.onError);
         that.src = that.original;
@@ -72,8 +74,10 @@
 
   LazyloadImagePrototype.attachedCallback = function () {
     var imgRect = this.getBoundingClientRect();
-    if (imgRect.top > document.documentElement.scrollTop - this.offset &&
-        imgRect.bottom < document.documentElement.clientHeight + this.offset) {
+    var displayTop = document.documentElement.scrollTop;
+    var displayBottom = displayTop + document.documentElement.clientHeight;
+    if (imgRect.top > displayTop - this.offset &&
+        imgRect.bottom < displayBottom + this.offset) {
       this.addEventListener('load', this.onLoad);
       this.addEventListener('error', this.onError);
       this.src = this.original;
