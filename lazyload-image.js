@@ -44,7 +44,7 @@
     var that = this;
 
     // swap original src attribute
-    this.original = this.src;
+    this.original = this.currentSrc || this.src;
     this.src = FALLBACK_IMAGE;
 
     // get offset attribute for pre-loading
