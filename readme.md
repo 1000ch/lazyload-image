@@ -32,4 +32,4 @@ You can specify load offset.
 
 ## License
 
-MIT
+MIT: http://1000ch.mit-license.org/
