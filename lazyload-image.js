@@ -55,6 +55,7 @@
     };
 
     this.onError = function (e) {
+      that.removeAttribute('srcset');
       that.src = FALLBACK_IMAGE;
       window.removeEventListener('scroll', that.onScroll);
     };
