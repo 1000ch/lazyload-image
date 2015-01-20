@@ -1,5 +1,9 @@
 # [`<lazyload-image>`](http://1000ch.github.io/lazyload-image)
 
+![](assets/lazy-sloth.jpg)
+
+Photo by [Susana Fernandez](https://www.flickr.com/photos/susivinh/6970379146)
+
 ## About
 
 Extended Image Element for lazy image loading as Web Components. Images will be loaded when they are shown.
