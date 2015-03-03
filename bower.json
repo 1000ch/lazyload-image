@@ -5,7 +5,7 @@
   "authors": [
     "1000ch <shogo.sensui@gmail.com>"
   ],
-  "description": "Extended image element for lazy loading as Web Components.",
+  "description": "HTMLImageElement extension for lazy loading.",
   "keywords": [
     "image",
     "lazyload",
