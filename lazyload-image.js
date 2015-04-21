@@ -2,7 +2,7 @@
   'use strict';
 
   var FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
-  var DEFAULT_OFFSET = 300;
+  var DEFAULT_OFFSET = 0;
 
   /**
    * throttle
@@ -48,7 +48,7 @@
     this.src = FALLBACK_IMAGE;
 
     // get offset attribute for pre-loading
-    this.offset = this.getAttribute('offset') - 0 || DEFAULT_OFFSET;
+    this.offset = Number(this.getAttribute('offset')) || DEFAULT_OFFSET;
 
     this.onLoad = function (e) {
       window.removeEventListener('scroll', that.onScroll);
@@ -61,11 +61,15 @@
     };
 
     this.onScroll = throttle(function (e) {
-      var imgRect = that.getBoundingClientRect();
-      var displayTop = document.documentElement.scrollTop;
-      var displayBottom = displayTop + document.documentElement.clientHeight;
-      if (imgRect.top > displayTop - that.offset &&
-          imgRect.bottom < displayBottom + that.offset) {
+
+      var rect   = that.getBoundingClientRect();
+      var top    = document.documentElement.scrollTop - that.offset;
+      var bottom = document.documentElement.clientHeight + that.offset;
+
+      if ((rect.bottom > top && rect.bottom < bottom) ||
+             (rect.top > top && rect.bottom < bottom) ||
+             (rect.top > top && rect.top < bottom )) {
+
         that.addEventListener('load', that.onLoad);
         that.addEventListener('error', that.onError);
         that.src = that.original;
@@ -74,23 +78,30 @@
   };
 
   LazyloadImagePrototype.attachedCallback = function () {
-    var imgRect = this.getBoundingClientRect();
-    var displayTop = document.documentElement.scrollTop;
-    var displayBottom = displayTop + document.documentElement.clientHeight;
-    if (imgRect.top > displayTop - this.offset &&
-        imgRect.bottom < displayBottom + this.offset) {
+
+    var rect   = this.getBoundingClientRect();
+    var top    = document.documentElement.scrollTop - this.offset;
+    var bottom = document.documentElement.clientHeight + this.offset;
+
+    if ((rect.bottom > top && rect.bottom < bottom) ||
+           (rect.top > top && rect.bottom < bottom) ||
+           (rect.top > top && rect.top < bottom )) {
+
       this.addEventListener('load', this.onLoad);
       this.addEventListener('error', this.onError);
       this.src = this.original;
+
     } else {
       window.addEventListener('scroll', this.onScroll);
     }
   };
 
   LazyloadImagePrototype.detachedCallback = function () {
+
     this.removeEventListener('load', this.onLoad);
     this.removeEventListener('error', this.onError);
     window.removeEventListener('scroll', this.onScroll);
+
   };
 
   // register element as lazyload-image
