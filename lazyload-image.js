@@ -1,3 +1,11 @@
+/**
+ * <lazyload-image>
+ * HTMLImageElement extension for lazy loading.
+ * http://github.com/1000ch/lazyload-image
+ *
+ * Copyright 1000ch
+ * licensed under the MIT license.
+ */
 (function () {
   'use strict';
 
