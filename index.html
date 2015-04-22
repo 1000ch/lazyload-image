@@ -13,7 +13,7 @@
     <div class="container">
       <section class="jumbotron">
         <h1>lazyload-image</h1>
-        <p>Extended Image Element for lazy loading as Web Components.</p>
+        <p>HTMLImageElement extension for lazy loading.</p>
         <p><a href="https://github.com/1000ch/lazyload-image" class="btn btn-primary btn-lg" role="button">Fork me on GitHub</a></p>
       </section>
       <section>
@@ -22,11 +22,10 @@
         <pre>&lt;script src="lazyload-image.js"&gt;&lt;/script&gt;</pre>
         <p>Modify your <code class="html">&lt;img&gt;</code> elements such as following.</p>
         <pre>&lt;img is="lazyload-image" src="path/to/your/image.jpg" width="100" height="100"&gt;</pre>
-        <h3>Fallback</h3>
-        <p>If browser does not support <code class="javascript">document.registerElement()</code>, Images will be loaded as usual.</p>
-        <h3>Offset option</h3>
         <p>You can specify load offset.</p>
         <pre>&lt;img is="lazyload-image" src="path/to/your/image.jpg" offset="200" width="100" height="100"&gt;</pre>
+        <h2>Fallback</h2>
+        <p>If browser does not support <code class="javascript">document.registerElement()</code>, Images will be loaded as usual.</p>
       </section>
       <section>
         <h2>Demo</h2>
