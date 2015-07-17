@@ -1,0 +1,25 @@
+{
+  "name": "lazyload-image",
+  "version": "1.0.0",
+  "description": "HTMLImageElement extension for lazy loading.",
+  "main": "lazyload-image.html",
+  "scripts": {
+    "start": "python -m http.server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1000ch/lazyload-image.git"
+  },
+  "keywords": [
+    "image",
+    "lazyload",
+    "WebComponents",
+    "web-components"
+  ],
+  "author": "1000ch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1000ch/lazyload-image/issues"
+  },
+  "homepage": "https://github.com/1000ch/lazyload-image#readme"
+}

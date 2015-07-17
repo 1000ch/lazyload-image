@@ -1,3 +1,4 @@
+<script>
 /**
  * <lazyload-image>
  * HTMLImageElement extension for lazy loading.
@@ -6,7 +7,7 @@
  * Copyright 1000ch
  * licensed under the MIT license.
  */
-(function () {
+window.LazyloadImage = (function () {
   'use strict';
 
   var FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
@@ -112,10 +113,11 @@
 
   };
 
-  // register element as lazyload-image
-  window.LazyloadImage = document.registerElement('lazyload-image', {
+  return document.registerElement('lazyload-image', {
     prototype: LazyloadImagePrototype,
     extends: 'img'
   });
 
 })();
+
+</script>
