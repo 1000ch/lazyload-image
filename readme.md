@@ -10,10 +10,10 @@ HTMLImageElement extension for lazy loading. Images will be loaded when they are
 
 ## Usage
 
-Load `lazyload-image.js` in your HTML.
+Load `lazyload-image.html` in your HTML.
 
 ```html
-<script src="lazyload-image.js"></script>
+<link rel="import" href="lazyload-image.html">
 ```
 
 Modify your `<img>` elements such as following.
