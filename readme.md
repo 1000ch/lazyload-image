@@ -10,6 +10,13 @@ HTMLImageElement extension for lazy loading. Images will be loaded when they are
 
 ## Usage
 
+Install `lazyload-image` from NPM or Bower.
+
+```sh
+$ npm install lazyload-image
+$ bower install lazyload-image
+```
+
 Load `lazyload-image.html` in your HTML.
 
 ```html
