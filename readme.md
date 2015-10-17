@@ -1,18 +1,16 @@
 # [`<lazyload-image>`](http://1000ch.github.io/lazyload-image)
 
+HTMLImageElement extension for lazy loading. Images will be loaded when they are shown.
+
 ![](assets/lazy-sloth.jpg)
 
 Photo by [Susana Fernandez](https://www.flickr.com/photos/susivinh/6970379146)
 
-## About
-
-HTMLImageElement extension for lazy loading. Images will be loaded when they are shown.
-
 ## Usage
 
-Install `lazyload-image` from NPM or Bower.
+Install `lazyload-image` via npm or bower.
 
-```sh
+```bash
 $ npm install lazyload-image
 $ bower install lazyload-image
 ```
@@ -37,7 +35,7 @@ You can specify load offset.
 
 ## Fallback
 
-If browser does not support `document.registerElement()`, Images will be loaded as usual.
+If a browser does not support `document.registerElement()`, images will be loaded as usual.
 
 ## License
 
