@@ -1,4 +1,5 @@
 <script>
+
 /**
  * <lazyload-image>
  * HTMLImageElement extension for lazy loading.
@@ -10,8 +11,8 @@
 window.LazyloadImage = (function () {
   'use strict';
 
-  var FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
-  var DEFAULT_OFFSET = 0;
+  const FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
+  const DEFAULT_OFFSET = 0;
 
   /**
    * throttle
@@ -22,15 +23,15 @@ window.LazyloadImage = (function () {
    * @description forked from underscore.js
    */
   function throttle(fn, delay) {
-    var context, args, result;
-    var timeout = null;
-    var previous = 0;
+    let context, args, result;
+    let timeout = null;
+    let previous = 0;
     return function() {
-      var now = Date.now();
+      let now = Date.now();
       if (!previous) {
         previous = now;
       }
-      var remaining = delay - (now - previous);
+      let remaining = delay - (now - previous);
       context = this;
       args = arguments;
       if (remaining <= 0) {
@@ -45,12 +46,10 @@ window.LazyloadImage = (function () {
   }
 
   // create prototype from HTMLImageElement
-  var LazyloadImagePrototype = Object.create(HTMLImageElement.prototype);
+  const LazyloadImagePrototype = Object.create(HTMLImageElement.prototype);
 
   // lifecycle callbacks
   LazyloadImagePrototype.createdCallback = function () {
-
-    var that = this;
 
     // swap original src attribute
     this.original = this.currentSrc || this.src;
@@ -59,38 +58,36 @@ window.LazyloadImage = (function () {
     // get offset attribute for pre-loading
     this.offset = Number(this.getAttribute('offset')) || DEFAULT_OFFSET;
 
-    this.onLoad = function (e) {
-      window.removeEventListener('scroll', that.onScroll);
+    this.onLoad = e => window.removeEventListener('scroll', this.onScroll);
+
+    this.onError = e => {
+      this.removeAttribute('srcset');
+      this.src = FALLBACK_IMAGE;
+      window.removeEventListener('scroll', this.onScroll);
     };
 
-    this.onError = function (e) {
-      that.removeAttribute('srcset');
-      that.src = FALLBACK_IMAGE;
-      window.removeEventListener('scroll', that.onScroll);
-    };
+    this.onScroll = throttle(e => {
 
-    this.onScroll = throttle(function (e) {
-
-      var rect   = that.getBoundingClientRect();
-      var top    = document.documentElement.scrollTop - that.offset;
-      var bottom = document.documentElement.clientHeight + that.offset;
+      let rect   = this.getBoundingClientRect();
+      let top    = document.documentElement.scrollTop - this.offset;
+      let bottom = document.documentElement.clientHeight + this.offset;
 
       if ((rect.bottom > top && rect.bottom < bottom) ||
              (rect.top > top && rect.bottom < bottom) ||
              (rect.top > top && rect.top < bottom )) {
 
-        that.addEventListener('load', that.onLoad);
-        that.addEventListener('error', that.onError);
-        that.src = that.original;
+        this.addEventListener('load', this.onLoad);
+        this.addEventListener('error', this.onError);
+        this.src = this.original;
       }
     }, 300);
   };
 
   LazyloadImagePrototype.attachedCallback = function () {
 
-    var rect   = this.getBoundingClientRect();
-    var top    = document.documentElement.scrollTop - this.offset;
-    var bottom = document.documentElement.clientHeight + this.offset;
+    let rect   = this.getBoundingClientRect();
+    let top    = document.documentElement.scrollTop - this.offset;
+    let bottom = document.documentElement.clientHeight + this.offset;
 
     if ((rect.bottom > top && rect.bottom < bottom) ||
            (rect.top > top && rect.bottom < bottom) ||
