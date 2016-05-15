@@ -11,7 +11,10 @@ Photo by [Susana Fernandez](https://www.flickr.com/photos/susivinh/6970379146)
 Install `lazyload-image` via npm or bower.
 
 ```bash
+# via npm
 $ npm install lazyload-image
+
+# via bower
 $ bower install lazyload-image
 ```
 
@@ -25,12 +28,6 @@ Modify your `<img>` elements such as following.
 
 ```html
 <img is="lazyload-image" src="path/to/your/image.jpg" width="100" height="100">
-```
-
-You can specify load offset.
-
-```html
-<img is="lazyload-image" src="path/to/your/image.jpg" offset="200" width="100" height="100">
 ```
 
 ## Fallback

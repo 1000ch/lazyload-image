@@ -9,15 +9,11 @@
   "keywords": [
     "image",
     "lazyload",
+    "WebComponents",
     "web-components"
   ],
   "license": "MIT",
   "ignore": [
-    "assets",
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "assets"
   ]
 }

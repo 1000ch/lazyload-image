@@ -6,10 +6,7 @@
   "scripts": {
     "start": "python -m http.server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/1000ch/lazyload-image.git"
-  },
+  "repository": "1000ch/lazyload-image",
   "keywords": [
     "image",
     "lazyload",
