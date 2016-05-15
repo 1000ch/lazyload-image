@@ -1,5 +1,4 @@
 <script>
-
 /**
  * <lazyload-image>
  * HTMLImageElement extension for lazy loading.
@@ -12,109 +11,42 @@ window.LazyloadImage = (function () {
   'use strict';
 
   const FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
-  const DEFAULT_OFFSET = 0;
-
-  /**
-   * throttle
-   * @param fn
-   * @param delay
-   * @returns {Function}
-   * @private
-   * @description forked from underscore.js
-   */
-  function throttle(fn, delay) {
-    let context, args, result;
-    let timeout = null;
-    let previous = 0;
-    return function() {
-      let now = Date.now();
-      if (!previous) {
-        previous = now;
-      }
-      let remaining = delay - (now - previous);
-      context = this;
-      args = arguments;
-      if (remaining <= 0) {
-        clearTimeout(timeout);
-        timeout = null;
-        previous = now;
-        result = fn.apply(context, args);
-        context = args = null;
-      }
-      return result;
-    };
-  }
-
-  // create prototype from HTMLImageElement
   const LazyloadImagePrototype = Object.create(HTMLImageElement.prototype);
 
-  // lifecycle callbacks
-  LazyloadImagePrototype.createdCallback = function () {
-
-    // swap original src attribute
-    this.original = this.currentSrc || this.src;
-    this.src = FALLBACK_IMAGE;
-
-    // get offset attribute for pre-loading
-    this.offset = Number(this.getAttribute('offset')) || DEFAULT_OFFSET;
-
-    this.onLoad = e => window.removeEventListener('scroll', this.onScroll);
-
-    this.onError = e => {
-      this.removeAttribute('srcset');
-      this.src = FALLBACK_IMAGE;
-      window.removeEventListener('scroll', this.onScroll);
-    };
-
-    this.onScroll = throttle(e => {
-
-      let rect   = this.getBoundingClientRect();
-      let top    = document.documentElement.scrollTop - this.offset;
-      let bottom = document.documentElement.clientHeight + this.offset;
-
-      if ((rect.bottom > top && rect.bottom < bottom) ||
-             (rect.top > top && rect.bottom < bottom) ||
-             (rect.top > top && rect.top < bottom )) {
-
-        this.addEventListener('load', this.onLoad);
-        this.addEventListener('error', this.onError);
+  LazyloadImagePrototype.visibleChanged = function(changes) {
+    for (let change of changes) {
+      let intersectionRect = change.intersectionRect;
+      if (intersectionRect.height * intersectionRect.width > 0) {
+        this.addEventListener('load', () => {
+          this.observer.unobserve(this);
+        });
+        this.addEventListener('error', () => {
+          this.removeAttribute('srcset');
+          this.src = FALLBACK_IMAGE;
+          this.observer.unobserve(this);
+        });
         this.src = this.original;
       }
-    }, 300);
-  };
-
-  LazyloadImagePrototype.attachedCallback = function () {
-
-    let rect   = this.getBoundingClientRect();
-    let top    = document.documentElement.scrollTop - this.offset;
-    let bottom = document.documentElement.clientHeight + this.offset;
-
-    if ((rect.bottom > top && rect.bottom < bottom) ||
-           (rect.top > top && rect.bottom < bottom) ||
-           (rect.top > top && rect.top < bottom )) {
-
-      this.addEventListener('load', this.onLoad);
-      this.addEventListener('error', this.onError);
-      this.src = this.original;
-
-    } else {
-      window.addEventListener('scroll', this.onScroll);
     }
   };
 
-  LazyloadImagePrototype.detachedCallback = function () {
+  LazyloadImagePrototype.createdCallback = function() {
+    this.original = this.currentSrc || this.src;
+    this.src = FALLBACK_IMAGE;
+    this.observer = new IntersectionObserver(this.visibleChanged.bind(this));
+  };
 
-    this.removeEventListener('load', this.onLoad);
-    this.removeEventListener('error', this.onError);
-    window.removeEventListener('scroll', this.onScroll);
+  LazyloadImagePrototype.attachedCallback = function() {
+    this.observer.observe(this);
+  };
 
+  LazyloadImagePrototype.detachedCallback = function() {
+    this.observer.unobserve(this);
   };
 
   return document.registerElement('lazyload-image', {
     prototype: LazyloadImagePrototype,
     extends: 'img'
   });
-
 })();
-
 </script>
