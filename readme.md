@@ -29,7 +29,7 @@ Load `lazyload-image.html` in your HTML.
 Modify your `<img>` elements such as following.
 
 ```html
-<img is="lazyload-image" src="path/to/your/image.jpg" width="100" height="100">
+<img is="lazyload-image" src="path/to/your/image.jpg" offset="200" width="100" height="100">
 ```
 
 ## Fallback
