@@ -12,6 +12,7 @@ window.LazyloadImage = (function () {
 
   const FALLBACK_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
   const LazyloadImagePrototype = Object.create(HTMLImageElement.prototype);
+  const DEFAULT_OFFSET = 0;
 
   LazyloadImagePrototype.visibleChanged = function(changes) {
     for (let change of changes) {
@@ -33,7 +34,10 @@ window.LazyloadImage = (function () {
   LazyloadImagePrototype.createdCallback = function() {
     this.original = this.currentSrc || this.src;
     this.src = FALLBACK_IMAGE;
-    this.observer = new IntersectionObserver(this.visibleChanged.bind(this));
+    this.offset = Number(this.getAttribute('offset')) || DEFAULT_OFFSET;
+    this.observer = new IntersectionObserver(this.visibleChanged.bind(this), {
+      rootMargin: `${this.offset}px`
+    });
   };
 
   LazyloadImagePrototype.attachedCallback = function() {
