@@ -20,16 +20,25 @@ $ bower install lazyload-image
 
 ## Usage
 
-Load `lazyload-image.html` in your HTML.
+Load `lazyload-image.js` in your JavaScript.
 
-```html
-<script type="module" src="lazyload-image.js"></script>
+```javascript
+import LazyloadImage from './lazyload-image.js';
+
+customElements.define('lazyload-image', LazyloadImage, {
+  extends: 'img'
+});
 ```
 
 Modify your `<img>` elements such as following.
 
 ```html
-<img is="lazyload-image" src="path/to/your/image.jpg" offset="200px" width="100" height="100">
+<img 
+  is="lazyload-image" 
+  src="path/to/your/image.jpg" 
+  offset="200px" 
+  width="100" 
+  height="100">
 ```
 
 ## Fallback
