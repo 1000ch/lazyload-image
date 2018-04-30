@@ -1,4 +1,4 @@
-export default class LazyloadImage extends Image {
+export default class LazyloadImage extends HTMLImageElement {
   static get FALLBACK_IMAGE() {
     return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42gEFAPr/AP///wAI/AL+Sr4t6gAAAABJRU5ErkJggg==';
   }
@@ -14,7 +14,7 @@ export default class LazyloadImage extends Image {
 
     this.original = this.currentSrc || this.src;
     this.src = LazyloadImage.FALLBACK_IMAGE;
-    this.onIntersectionChange = this.onIntersectionChange.bind(this);
+    this.onIntersect = this.onIntersect.bind(this);
   }
 
   connectedCallback() {
@@ -33,26 +33,26 @@ export default class LazyloadImage extends Image {
     this.setAttribute('offset', value);
   }
 
-  observe() {
-    if (this.observer === null) {
-      this.observer = new IntersectionObserver(this.onIntersectionChange, {
+  get observer() {
+    if (!this.intersectionObserver) {
+      this.intersectionObserver = new IntersectionObserver(this.onIntersect, {
         rootMargin: this.offset
       });
     }
 
+    return this.intersectionObserver;
+  }
+
+  observe() {
     this.observer.observe(this);
   }
 
   unobserve() {
-    if (this.observer !== null) {
-      this.observer.unobserve(this);
-      this.observer.disconnect();
-    }
-
-    this.observer = null;
+    this.observer.unobserve(this);
+    this.observer.disconnect();
   }
 
-  onIntersectionChange(entries) {
+  onIntersect(entries) {
     if (entries.length === 0) {
       return;
     }
