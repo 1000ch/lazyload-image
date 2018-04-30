@@ -47,4 +47,4 @@ If a browser does not support `customElements.define()`, images will be loaded a
 
 ## License
 
-MIT: http://1000ch.mit-license.org
+[MIT](https://1000ch.mit-license.org) © [Shogo Sensui](https://github.com/1000ch)
