@@ -12,8 +12,10 @@ export default class LazyloadImage extends HTMLImageElement {
   constructor(width, height) {
     super(width, height);
 
-    this.original = this.currentSrc || this.src;
+    this.originalSrc = this.currentSrc || this.src;
+    this.originalSrcset = this.srcset;
     this.src = LazyloadImage.FALLBACK_IMAGE;
+    this.srcset = "";
     this.onIntersect = this.onIntersect.bind(this);
   }
 
@@ -70,7 +72,8 @@ export default class LazyloadImage extends HTMLImageElement {
       this.unobserve();
     });
 
-    this.src = this.original;
+    this.src = this.originalSrc;
+    this.srcset = this.originalSrcset;
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
