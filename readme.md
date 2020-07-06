@@ -1,26 +1,20 @@
-# [`<lazyload-image>`](http://1000ch.github.io/lazyload-image)
+🚩 Finally [Native lazy-loading for the web](https://web.dev/native-lazy-loading/) was introduced. I recommend you to use [`loading` attribute](https://html.spec.whatwg.org/#lazy-loading-attributes) instead.
 
-HTMLImageElement extension for lazy loading. Images will be loaded when they are shown.
+# lazyload-image
 
-![](assets/lazy-sloth.jpg)
-
-Photo by [Susana Fernandez](https://www.flickr.com/photos/susivinh/6970379146)
+[HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) extension for lazy loading. Images will be loaded when they are shown.
 
 ## Install
 
-Install `lazyload-image` via npm or bower.
+Install `lazyload-image` via npm.
 
 ```bash
-# via npm
 $ npm install lazyload-image
-
-# via bower
-$ bower install lazyload-image
 ```
 
 ## Usage
 
-Load `lazyload-image.js` in your JavaScript.
+Import `lazyload-image.js` and register it.
 
 ```javascript
 import LazyloadImage from './lazyload-image.js';
@@ -33,12 +27,13 @@ customElements.define('lazyload-image', LazyloadImage, {
 Modify your `<img>` elements such as following.
 
 ```html
-<img 
-  is="lazyload-image" 
-  src="path/to/your/image.jpg" 
-  offset="200px" 
-  width="100" 
-  height="100">
+<img
+  is="lazyload-image"
+  src="path/to/your/image.jpg"
+  offset="200px"
+  width="100"
+  height="100"
+>
 ```
 
 ## Fallback
