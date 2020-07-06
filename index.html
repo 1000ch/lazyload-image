@@ -3,82 +3,118 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>lazyload-image</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.3.0/styles/github.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Mono:400,700">
+    <title>&lt;lazyload-image&gt;: HTMLImageElement extension for lazy loading</title>
+    <link rel="stylesheet" href="https://1000ch.github.io/gh-pages.css/gh-pages.css">
     <style>
-      body { font-family: Roboto, Helvetica, Arial, sans-serif; }
-      code { font-family: "Roboto Mono", "Source Code Pro", Consolas, "Courier New", monospace; }
-      .container { margin: auto; max-width: 960px; }
-      a { text-decoration: none; color: #199ad5; }
-      a:hover, a:active { color: #e2007a; }
-      a code { color: #199ad5 !important; }
-      a:hover code, a:active code { color: #e2007a !important; }
       .image-container {
         display: flex;
         flex-direction: column;
         margin: auto;
-        max-width: 640px;
-        min-width: 320px;
+        max-width: 960px;
+        padding: 16px;
+      }
+
+      .image-container img {
+        width: 100%;
       }
     </style>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script defer src="https://buttons.github.io/buttons.js"></script>
+    <script defer src="https://unpkg.com/github-corner"></script>
+    <script type="module">
+      import XMarked from 'https://unpkg.com/x-marked';
+      import LazyloadImage from './lazyload-image.js';
+
+      customElements.define('x-marked', XMarked);
+      customElements.define('lazyload-image', LazyloadImage, {
+        extends: 'img'
+      });
+
+      window.addEventListener('load', () => {
+        const xmarked = document.querySelector('x-marked');
+        const div = document.querySelector('div');
+        const h2 = xmarked.shadowRoot.querySelector('h2');
+        xmarked.shadowRoot.querySelector('div').insertBefore(div, h2);
+      });
+    </script>
   </head>
   <body>
-    <div class="container">
-      <h1>lazyload-image</h1>
-      <iframe src="https://ghbtns.com/github-btn.html?user=1000ch&repo=lazyload-image&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-      <iframe src="https://ghbtns.com/github-btn.html?user=1000ch&repo=lazyload-image&type=watch&count=true&size=large&v=2" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-      <iframe src="https://ghbtns.com/github-btn.html?user=1000ch&repo=lazyload-image&type=fork&count=true&size=large&v=2" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-      <p>HTMLImageElement extension for lazy loading.</p>
-      <h2>Install</h2>
-      <p>Install <code class="html">lazyload-image</code> via npm or bower.</p>
-      <pre><code class="bash"># via npm
-$ npm install lazyload-image
+    <div>
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/1000ch/lazyload-image" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star 1000ch/lazyload-image on GitHub">Star</a>
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/1000ch" data-size="large" data-show-count="true" aria-label="Follow @1000ch on GitHub">Follow @1000ch</a>
+    </div>
+    <github-corner>
+      <a href="https://github.com/1000ch/lazyload-image">GitHub</a>
+    </github-corner>
+    <x-marked highlight class="container">
+# lazyload-image
 
-# via bower
-$ bower install lazyload-image</code></pre>
-      <h2>Usage</h2>
-      <p>Load <code class="html">lazyload-image.js</code> in your JavaScript.</p>
-      <pre><code class="javascript">import LazyloadImage from './lazyload-image.js';
+[HTMLImageElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement) extension for lazy loading. Images will be loaded when they are shown.
+
+## Install
+
+Install `lazyload-image` via npm.
+
+```bash
+$ npm install lazyload-image
+```
+
+## Usage
+
+Import `lazyload-image.js` and register it.
+
+```javascript
+import LazyloadImage from './lazyload-image.js';
 
 customElements.define('lazyload-image', LazyloadImage, {
   extends: 'img'
-});</code></pre>
-      <p>Modify your <code class="html">&lt;img&gt;</code> elements such as following.</p>
-      <pre><code class="html">&lt;img is="lazyload-image" src="path/to/your/image.jpg" width="100" height="100"&gt;</code></pre>
-      <p>You can specify load offset.</p>
-      <pre><code class="html">&lt;img is="lazyload-image" src="path/to/your/image.jpg" offset="200" width="100" height="100"&gt;</code></pre>
-      <h2>Fallback</h2>
-      <p>If browser does not support <code class="javascript">customElements.define()</code>, Images will be loaded as usual.</p>
-      <h2>Demo</h2>
-      <p>Recommend you to open <strong>DevTools's Elements tab</strong> to see behavior of <code class="html">&lt;lazyload-image&gt;</code>.</p>
-      <div class="image-container">
-        <img is="lazyload-image" offset="200px" src="assets/img/1.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/2.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/3.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/4.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/5.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/6.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/7.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/8.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/9.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/10.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/11.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/12.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/13.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/14.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/15.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/16.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/17.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/18.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/19.jpg" width="100%">
-        <img is="lazyload-image" offset="200px" src="assets/img/20.jpg" width="100%">
-      </div>
+});
+```
+
+Modify your `<img>` elements such as following.
+
+```html
+<img
+  is="lazyload-image"
+  src="path/to/your/image.jpg"
+  offset="200px"
+  width="100"
+  height="100"
+>
+```
+
+## Fallback
+
+If a browser does not support `customElements.define()`, images will be loaded as usual.
+
+## License
+
+[MIT](https://1000ch.mit-license.org) © [Shogo Sensui](https://github.com/1000ch)
+    </x-marked>
+    <div class="image-container">
+      <h1>Demo</h1>
+      <img is="lazyload-image" offset="200px" src="assets/img/1.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/2.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/3.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/4.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/5.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/6.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/7.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/8.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/9.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/10.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/11.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/12.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/13.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/14.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/15.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/16.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/17.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/18.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/19.jpg">
+      <img is="lazyload-image" offset="200px" src="assets/img/20.jpg">
     </div>
-    <a href="https://github.com/1000ch/lazyload-image" class="github-corner"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-    <script src="https://cdn.jsdelivr.net/highlight.js/9.3.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script type="module" src="app.js"></script>
   </body>
 </html>
