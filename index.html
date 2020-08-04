@@ -22,6 +22,7 @@
     <script defer src="https://buttons.github.io/buttons.js"></script>
     <script defer src="https://unpkg.com/github-corner"></script>
     <script type="module">
+      import { windowReady } from 'https://unpkg.com/html-ready';
       import XMarked from 'https://unpkg.com/x-marked';
       import LazyloadImage from './lazyload-image.js';
 
@@ -30,7 +31,7 @@
         extends: 'img'
       });
 
-      window.addEventListener('load', () => {
+      windowReady.then(() => {
         const xmarked = document.querySelector('x-marked');
         const div = document.querySelector('div');
         const h2 = xmarked.shadowRoot.querySelector('h2');
