@@ -9,23 +9,26 @@ export default class LazyloadImage extends HTMLImageElement {
     ];
   }
 
-  constructor(width, height) {
-    super(width, height);
+  original?: string = null;
+  intersectionObserver?: IntersectionObserver = null;
+
+  constructor() {
+    super();
 
     this.original = this.currentSrc || this.src;
     this.src = LazyloadImage.FALLBACK_IMAGE;
     this.onIntersect = this.onIntersect.bind(this);
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     this.observe();
   }
 
-  disconnectedCallback() {
+  disconnectedCallback(): void {
     this.unobserve();
   }
 
-  get offset() {
+  get offset(): string {
     return this.getAttribute('offset');
   }
 
@@ -33,7 +36,7 @@ export default class LazyloadImage extends HTMLImageElement {
     this.setAttribute('offset', value);
   }
 
-  get observer() {
+  get observer(): IntersectionObserver {
     if (!this.intersectionObserver) {
       this.intersectionObserver = new IntersectionObserver(this.onIntersect, {
         rootMargin: this.offset
@@ -43,16 +46,16 @@ export default class LazyloadImage extends HTMLImageElement {
     return this.intersectionObserver;
   }
 
-  observe() {
+  observe(): void {
     this.observer.observe(this);
   }
 
-  unobserve() {
+  unobserve(): void {
     this.observer.unobserve(this);
     this.observer.disconnect();
   }
 
-  onIntersect(entries) {
+  onIntersect(entries: IntersectionObserverEntry[]): void {
     if (entries.length === 0) {
       return;
     }
@@ -73,7 +76,7 @@ export default class LazyloadImage extends HTMLImageElement {
     this.src = this.original;
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string): void {
     if (this.observer === null) {
       return;
     }

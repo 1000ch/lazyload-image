@@ -18,5 +18,17 @@
     "email": "shogosensui@gmail.com",
     "web": "https://github.com/1000ch"
   },
-  "main": "lazyload-image.js"
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.module.js",
+  "esmodule": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/index.mjs",
+  "scripts": {
+    "build": "microbundle",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "microbundle": "^0.12.3"
+  }
 }
