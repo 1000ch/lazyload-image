@@ -24,7 +24,7 @@
     <script type="module">
       import { windowReady } from 'https://unpkg.com/html-ready';
       import XMarked from 'https://unpkg.com/x-marked';
-      import LazyloadImage from './lazyload-image.js';
+      import LazyloadImage from 'https://unpkg.com/lazyload-image';
 
       customElements.define('x-marked', XMarked);
       customElements.define('lazyload-image', LazyloadImage, {
@@ -66,10 +66,10 @@ $ npm install lazyload-image
 
 ## Usage
 
-Import `lazyload-image.js` and register it.
+Import `LazyloadImage` and register it.
 
 ```javascript
-import LazyloadImage from './lazyload-image.js';
+import LazyloadImage from 'https://unpkg.com/lazyload-image';
 
 customElements.define('lazyload-image', LazyloadImage, {
   extends: 'img'

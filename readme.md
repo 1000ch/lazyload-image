@@ -14,10 +14,10 @@ $ npm install lazyload-image
 
 ## Usage
 
-Import `lazyload-image.js` and register it.
+Import `LazyloadImage` and register it.
 
 ```javascript
-import LazyloadImage from './lazyload-image.js';
+import LazyloadImage from 'https://unpkg.com/lazyload-image';
 
 customElements.define('lazyload-image', LazyloadImage, {
   extends: 'img'
