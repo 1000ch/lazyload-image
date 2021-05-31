@@ -29,6 +29,6 @@
     "prepublish": "npm run build"
   },
   "devDependencies": {
-    "microbundle": "^0.12.3"
+    "microbundle": "^0.13.1"
   }
 }
